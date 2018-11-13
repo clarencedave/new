@@ -17,3 +17,21 @@ const IndexPage = () => (
 )
 
 export default IndexPage
+export const listQuery = graphql`
+  query ListQuery {
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+      edges {
+        node {
+          fields{
+            slug
+          }
+          excerpt(pruneLength: 250)
+          frontmatter {
+            date(formatString: "MMMM Do YYYY")
+            title
+          }
+        }
+      }
+    }
+  }
+`
