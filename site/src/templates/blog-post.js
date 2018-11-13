@@ -1,15 +1,28 @@
 import React from 'react';
-import Layout from '../components/layout';
-function BlogPost() {
-    const post = props.data.markdownRemark;
-    const { title } = post.frontmatter;
-    return (
-        <Layout>
-            <div>
-                hello post
+import Helmet from 'react-helmet';
+
+
+export default function Template({data})
+{
+    const {markdownRemark: post} = data;
+    //const post = data.markdownRemark;
+    return(
+        <div>
+            <h1>{post.frontmatter.title}</h1>
         </div>
-        </Layout>
     )
 }
-export default BlogPost
 
+export const postQuery = graphql`
+    query BlogPostbyPath($path: String!)
+    {
+        markdownremark(frontmatter: {path: {eq: $path}})
+        {
+            html
+            frontmatter{
+                path
+                title
+            }
+        }
+    }
+`
