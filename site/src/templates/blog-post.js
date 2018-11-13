@@ -1,6 +1,8 @@
 import React from 'react';
 import Layout from '../components/layout';
 function BlogPost() {
+    const post = props.data.markdownRemark;
+    const { title } = post.frontmatter;
     return (
         <Layout>
             <div>
@@ -10,3 +12,4 @@ function BlogPost() {
     )
 }
 export default BlogPost
+
